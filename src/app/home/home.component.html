@@ -1,0 +1,103 @@
+<main
+  class="shadow-md sm:rounded-lg border-gray-700 min-h-screen w-full"
+  *ngIf="!loading"
+>
+  <!-- Filter select - gender -->
+  <div class="py-3 flex justify-center">
+    <label for="gender-select" class="mr-2 text-gray-400">{{
+      translationService.getTranslation("filter.title")
+    }}</label>
+    <select
+      id="gender-select"
+      class="font-bold text-sm text-gray-700 bg-transparent border-0 border-gray-700 border-b-2 border-x-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-700 peer rounded-md py-1 px-2"
+      (change)="setFilterGender($event)"
+    >
+      <option value="">
+        {{ translationService.getTranslation("filter.all") }}
+      </option>
+      <option value="male">
+        {{ translationService.getTranslation("filter.male") }}
+      </option>
+      <option value="female">
+        {{ translationService.getTranslation("filter.female") }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Data table users -->
+  <div class="relative overflow-x-auto lg:px-20 lg:py-4 px-0">
+    <table
+      class="text-sm text-left text-zinc-500 border-2 border-gray-700 rounded-lg w-full"
+    >
+      <thead class="text-white uppercase bg-gray-800">
+        <tr>
+          <th class="p-3">
+            {{ translationService.getTranslation("datatable.name") }}
+          </th>
+          <th class="p-3">
+            {{ translationService.getTranslation("datatable.email") }}
+          </th>
+          <th class="p-3">
+            {{ translationService.getTranslation("datatable.university") }}
+          </th>
+          <th (click)="handleSort()" class="cursor-pointer p-3">
+            {{ translationService.getTranslation("datatable.age") }}
+            <span
+              *ngIf="sortOrder"
+              [innerHTML]="sortOrderIcon()"
+              class="ml-2"
+            ></span>
+          </th>
+          <th class="p-3">
+            {{ translationService.getTranslation("datatable.gender") }}
+          </th>
+          <th class="p-3 sr-only"></th>
+        </tr>
+      </thead>
+      <tbody class="rounded-lg">
+        <tr
+          *ngFor="let user of filteredUsers.slice(0, showingUsers)"
+          class="text-gray-400 font-bold border-b bg-gray-800 border-gray-600 last:border-none hover:bg-gray-700 hover:text-white"
+        >
+          <td class="p-3">{{ user.firstName }} {{ user.lastName }}</td>
+          <td class="p-3">{{ user.email }}</td>
+          <td class="p-3">{{ user.university }}</td>
+          <td class="p-3">{{ user.age }}</td>
+          <td class="p-3">{{ user.gender }}</td>
+          <td class="p-3">
+            <a
+              [routerLink]="['/user-details', user.id]"
+              class="hover:underline"
+            >
+              {{ translationService.getTranslation("datatable.details") }}
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Show more button - If there are more users, show more, otherwise show 'No data' message and disable the button -->
+  <div class="flex justify-center pb-3">
+    <button
+      (click)="handleShowMore()"
+      [disabled]="showingUsers >= filteredUsers.length"
+      [class.bg-gray-700]="showingUsers < filteredUsers.length"
+      [class.hover:bg-gray-800]="showingUsers < filteredUsers.length"
+      [class.bg-gray-400]="showingUsers >= filteredUsers.length"
+      [class.cursor-not-allowed]="showingUsers >= filteredUsers.length"
+      [class.text-white]="showingUsers < filteredUsers.length"
+      class="text-sm font-semibold py-2 px-4 rounded mt-4"
+    >
+      {{
+        showingUsers >= filteredUsers.length
+          ? translationService.getTranslation("datatable.no_data")
+          : translationService.getTranslation("datatable.show_more")
+      }}
+    </button>
+  </div>
+</main>
+
+<div *ngIf="loading" class="flex items-center justify-center min-h-screen">
+  <app-spinner></app-spinner>
+</div>
