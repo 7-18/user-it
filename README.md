@@ -2,7 +2,7 @@
 
 ## Production
 
-[View User-It](https://user-it.vercel.app/)
+[View User-It](https://user-it.vercel.app/) deployment.
 
 ## Installation
 
