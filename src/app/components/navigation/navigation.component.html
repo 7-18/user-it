@@ -1,0 +1,103 @@
+<!-- Header - "navigation" bar -->
+
+<!-- Dropdown language, change language. -->
+<nav class="container relative flex justify-end gap-5 pt-2">
+  <div class="flex items-center relative">
+    <button
+      type="button"
+      data-dropdown-toggle="language-dropdown-menu"
+      class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-white rounded-lg cursor-pointer hover:bg-gray-700 hover:text-white"
+      (click)="showDropdown = !showDropdown"
+    >
+      <img
+        [src]="currentLanguage === 'en' ? EN : ES"
+        alt="Language"
+        class="w-5 h-5 mr-2 rounded-full"
+      />
+      {{
+        currentLanguage === "en"
+          ? translationService.getTranslation("language.en")
+          : translationService.getTranslation("language.es")
+      }}
+    </button>
+    <div
+      class="z-50 my-4 text-base list-none divide-y divide-gray-100 rounded-lg shadow shadow-gray-400 bg-gray-700 absolute top-8 w-36"
+      id="language-dropdown-menu"
+      *ngIf="showDropdown"
+    >
+      <ul class="py-2 font-medium w-full" role="none">
+        <li>
+          <button
+            class="px-4 py-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-white inline-flex items-center w-full"
+            (click)="changeLanguage('en'); showDropdown = false"
+          >
+            <img
+              [src]="EN"
+              alt="English"
+              class="h-3.5 w-3.5 rounded-full mr-2"
+            />
+            {{ translationService.getTranslation("language.en") }}
+          </button>
+        </li>
+        <li>
+          <button
+            class="px-4 py-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-white inline-flex items-center w-full"
+            (click)="changeLanguage('es'); showDropdown = false"
+          >
+            <img
+              [src]="ES"
+              alt="Spanish"
+              class="h-3.5 w-3.5 rounded-full mr-2"
+            />
+            {{ translationService.getTranslation("language.es") }}
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Dropdown Menu, user info and logout. -->
+  <div class="flex items-center relative">
+    <button
+      type="button"
+      class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+      id="user-menu-button"
+      aria-expanded="false"
+      data-dropdown-toggle="user-dropdown"
+      data-dropdown-placement="bottom"
+      (click)="showMenu = !showMenu"
+      *ngIf="currentUser"
+    >
+      <img
+        class="w-8 h-8 rounded-full"
+        [src]="currentUser.image"
+        alt="user image"
+        loading="lazy"
+      />
+    </button>
+    <div
+      class="z-50 my-4 text-base list-none divide-y rounded-lg shadow shadow-gray-400 bg-gray-700 divide-gray-600 absolute -bottom-36 right-0"
+      id="user-dropdown"
+      *ngIf="showMenu"
+    >
+      <div class="px-4 py-3">
+        <span class="block text-sm text-white"
+          >{{ currentUser?.firstName }} {{ currentUser?.lastName }}</span
+        >
+        <span class="block text-sm truncate text-gray-400">{{
+          currentUser?.email
+        }}</span>
+      </div>
+      <ul class="py-2" aria-labelledby="user-menu-button">
+        <li>
+          <button
+            class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white w-full"
+            (click)="logout(); showMenu = false"
+          >
+            {{ translationService.getTranslation("login.logout") }}
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
