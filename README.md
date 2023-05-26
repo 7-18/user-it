@@ -26,7 +26,7 @@ Run `ng serve -o`. Open your browser at `http://localhost:4200/`.
 Includes a default user data list in JSON format for login. The file contains a list of users along with their respective data: email and password.
 
 ### JSON Structure
-The users.json file contains the default user list in JSON format.
+The DATA.lst file contains the default user list in JSON format.
 
 The JSON is structured as follows:
 
