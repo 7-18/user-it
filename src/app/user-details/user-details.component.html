@@ -1,0 +1,132 @@
+<!-- User card with all the details of the user by id -->
+<div
+  class="container flex flex-col items-center justify-center px-4 py-8"
+  *ngIf="!loading"
+>
+  <div class="border-2 border-gray-700 rounded-lg shadow-lg p-6 bg-gray-800">
+    <div class="flex justify-center">
+      <div class="bg-gray-400 rounded-full w-16 h-16">
+        <img
+          [src]="user.image"
+          class="w-full h-full rounded-full"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <div class="mb-4 flex flex-col items-center">
+      <h2 class="text-2xl font-bold text-white">
+        {{ user.firstName }} {{ user.lastName }}
+      </h2>
+      <p class="text-gray-400">{{ user.email }}</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 text-center">
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.username") }}
+        </p>
+        <p class="text-gray-400">{{ user.username }}</p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.age") }}
+        </p>
+        <p class="text-gray-400">{{ user.age }}</p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.gender") }}
+        </p>
+        <p class="text-gray-400">{{ user.gender }}</p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.university") }}
+        </p>
+        <p class="text-gray-400">{{ user.university }}</p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.phone") }}
+        </p>
+        <p class="text-gray-400">{{ user.phone }}</p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.birthDate") }}
+        </p>
+        <p class="text-gray-400">{{ user.birthDate }}</p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.bloodGroup") }}
+        </p>
+        <p class="text-gray-400">{{ user.bloodGroup }}</p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.height") }}
+        </p>
+        <p class="text-gray-400">{{ user.height }} cm</p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.weight") }}
+        </p>
+        <p class="text-gray-400">{{ user.weight }} kg</p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.eyeColor") }}
+        </p>
+        <p class="text-gray-400">{{ user.eyeColor }}</p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.hairColor") }}
+        </p>
+        <p class="text-gray-400">{{ user.hair.color }}</p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.hairType") }}
+        </p>
+        <p class="text-gray-400">{{ user.hair.type }}</p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.address") }}
+        </p>
+        <p class="text-gray-400">{{ user.address.address }}</p>
+        <p class="text-gray-400">
+          {{ user.address.city }}, {{ user.address.state }}
+          {{ user.address.postalCode }}
+        </p>
+      </div>
+      <div>
+        <p class="font-bold text-white">
+          {{ translationService.getTranslation("details.company") }}
+        </p>
+        <p class="text-gray-400">{{ user.company.name }}</p>
+        <p class="text-gray-400">
+          {{ user.company.department }}, {{ user.company.title }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4">
+    <button
+      type="button"
+      class="flex gap-3 items-center font-medium justify-center py-2 px-4 text-sm text-white rounded-lg cursor-pointer hover:bg-gray-700 bg-gray-600"
+      (click)="back()"
+    >
+      <i class="fa-solid fa-chevron-left"></i>
+      {{ translationService.getTranslation("details.back") }}
+    </button>
+  </div>
+</div>
+
+<div *ngIf="loading" class="flex items-center justify-center min-h-screen">
+  <app-spinner></app-spinner>
+</div>
