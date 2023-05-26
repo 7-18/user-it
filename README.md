@@ -1,8 +1,14 @@
 # UserIt
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.2.
+## Production
+
+[Click here to see User It](https://user-it.vercel.app/)
 
 ## Installation
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.2.
+
+This project use the public API [DummyJSON](https://dummyjson.com/).
 
 ```bash
 npm install -g @angular/cli@16.0.2
@@ -15,15 +21,12 @@ npm install
 
 Run `ng serve -o`. Open your browser at `http://localhost:4200/`.
 
-## Default User Data List - IMPORTANT
+## User data list
 
 Includes a default user data list in JSON format for login. The file contains a list of users along with their respective data: email and password.
 
-### users.json
-
-The users.json file contains the default user list in JSON format.
-
 ### JSON Structure
+The users.json file contains the default user list in JSON format.
 
 The JSON is structured as follows:
 
