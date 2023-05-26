@@ -2,7 +2,7 @@
 
 ## Production
 
-[Click here to see User It](https://user-it.vercel.app/)
+[View User-It](https://user-it.vercel.app/)
 
 ## Installation
 
