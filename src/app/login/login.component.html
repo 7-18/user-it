@@ -1,0 +1,134 @@
+<!-- Login section. The button submit is disabled by default, enable it when the form is filled. -->
+<section class="flex justify-center items-center p-4 h-screen lg:my-0 my-4">
+  <div
+    class="flex flex-col items-center justify-center bg-gray-200 rounded-lg shadow-lg p-8 lg:w-2/5 w-full"
+  >
+    <img
+      [src]="LOGIN_VECTOR"
+      alt="logo_company"
+      class="w-40 mb-6"
+      loading="lazy"
+    />
+    <div class="w-full">
+      <h1 class="text-lg font-semibold mb-6 text-center">
+        <span>{{ translationService.getTranslation("login.header") }}</span>
+        <span class="text-sky-800 select-none">User-It</span>
+      </h1>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="w-full flex items-start justify-center flex-col">
+          <span class="uppercase text-xs mb-1.5 font-medium">{{
+            translationService.getTranslation("login.email")
+          }}</span>
+          <div class="w-full relative">
+            <span
+              class="absolute top-2/4 right-3 -translate-y-2/4 text-xs text-gray-400 focus:text-gray-900"
+              *ngIf="isEmailHovered"
+            >
+              <i class="fa-solid fa-user"></i>
+            </span>
+            <input
+              class="w-full pl-3 py-2 border rounded-md text-gray-500 focus:text-gray-900 hover:border-gray-400 focus:border-gray-900 outline-none my-3"
+              type="email"
+              name="email"
+              minlength="10"
+              placeholder="{{
+                translationService.getTranslation('login.email_placeholder')
+              }}"
+              (mouseenter)="isEmailHovered = true"
+              (mouseleave)="isEmailHovered = false"
+              [(ngModel)]="emailValue"
+              (input)="onInputChange()"
+              required
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+            />
+          </div>
+        </div>
+
+        <div class="w-full flex items-start justify-center flex-col">
+          <span class="uppercase text-xs mb-1.5 font-medium">{{
+            translationService.getTranslation("login.password")
+          }}</span>
+          <div class="w-full relative">
+            <span
+              class="absolute top-2/4 right-3 -translate-y-2/4 text-xs text-gray-400 focus:text-gray-900"
+              *ngIf="isPasswordHovered"
+            >
+              <i class="fa-solid fa-key"></i>
+            </span>
+            <input
+              class="w-full pl-3 py-2 border rounded-md text-gray-500 focus:text-gray-900 hover:border-gray-400 focus:border-gray-900 outline-none my-3"
+              type="password"
+              name="password"
+              minlength="6"
+              placeholder="{{
+                translationService.getTranslation('login.password_placeholder')
+              }}"
+              (mouseenter)="isPasswordHovered = true"
+              (mouseleave)="isPasswordHovered = false"
+              [(ngModel)]="passwordValue"
+              (input)="onInputChange()"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="w-full flex items-center justify-end my-6">
+          <span
+            class="font-medium text-xs text-zinc-500 hover:text-zinc-900 hover:underline cursor-not-allowed"
+          >
+            {{ translationService.getTranslation("login.forgot_password") }}
+          </span>
+        </div>
+        <button
+          type="submit"
+          class="w-2/5 py-3 rounded-md text-xs"
+          [class.bg-blue-600]="loginForm.valid"
+          [class.bg-gray-400]="loginForm.invalid"
+          [class.hover:bg-blue-700]="loginForm.valid"
+          [class.cursor-pointer]="loginForm.valid"
+          [class.cursor-not-allowed]="loginForm.invalid"
+          [class.text-white]="loginForm.valid"
+          [disabled]="loginForm.invalid"
+        >
+          {{ translationService.getTranslation("login.submit") }}
+        </button>
+
+        <div
+          class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-10"
+          *ngIf="showErrorAlert"
+          (click)="closeAlert()"
+        >
+          <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+            <div class="flex items-center relative">
+              <p class="font-bold flex items-center">
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5 mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+
+                {{ translationService.getTranslation("alert.title_error") }}
+              </p>
+              <span
+                class="ml-2 absolute right-0 cursor-pointer"
+                (click)="$event.stopPropagation(); closeAlert()"
+                ><i class="fa-solid fa-xmark"></i
+              ></span>
+            </div>
+            <p class="p-4">
+              {{ translationService.getTranslation("alert.message_error") }}
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
