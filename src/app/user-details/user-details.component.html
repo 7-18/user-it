@@ -127,6 +127,6 @@
   </div>
 </div>
 
-<div *ngIf="loading" class="flex items-center justify-center min-h-screen">
-  <app-spinner></app-spinner>
-</div>
+  <app-spinner [loading]="loading"></app-spinner>
+
+<app-error [showErrorAlert]="showErrorAlert" [status]="errorStatus"></app-error>

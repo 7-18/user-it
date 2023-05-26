@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../service/api/api.service';
 import { User } from '../types/User';
-import { TranslationsService } from '../service/translations/translations.service';
+import { TranslationService } from '../service/translation/translation.service';
 import { Location } from '@angular/common';
 
 @Component({
@@ -14,8 +14,10 @@ export class UserDetailsComponent {
   userId: string | null = null;
   user = {} as User;
   loading = true;
+  showErrorAlert = false;
+  errorStatus = '';
 
-  constructor(private route: ActivatedRoute, private api: ApiService, public translationService: TranslationsService, private location: Location) { }
+  constructor(private route: ActivatedRoute, private api: ApiService, public translationService: TranslationService, private location: Location) { }
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id') || null;
@@ -23,12 +25,17 @@ export class UserDetailsComponent {
   }
 
   getData(): void {
-    this.api.getOneUser(this.userId).subscribe(
-      data => {
+    this.api.getOneUser(this.userId).subscribe({
+      next: (data) => {
         this.user = data;
         this.loading = false;
+      },
+      error: (error) => {
+        this.showErrorAlert = true;
+        this.loading = false;
+        this.errorStatus = error.status;
       }
-    )
+    });
   }
 
   back(): void {

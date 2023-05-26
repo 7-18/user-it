@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '../types/User';
 import { ApiService } from '../service/api/api.service';
-import { TranslationsService } from '../service/translations/translations.service';
+import { TranslationService } from '../service/translation/translation.service';
 
 @Component({
   selector: 'app-home',
@@ -15,23 +15,30 @@ export class HomeComponent {
   filteredUsers: User[] = [];
   data: User[] = [];
   loading = true;
+  showErrorAlert = false;
+  errorStatus = '';
   sortBy = '';
   sortOrder = '';
 
-  constructor(private api: ApiService, public translationService: TranslationsService) { }
+  constructor(private api: ApiService, public translationService: TranslationService) { }
 
   ngOnInit() {
     this.getData();
   }
 
   getData(): void {
-    this.api.getUsers().subscribe(
-      data => {
+    this.api.getUsers().subscribe({
+      next: (data) => {
         this.filteredUsers = data.users;
         this.data = data.users;
         this.loading = false;
+      },
+      error: (error) => {
+        this.showErrorAlert = true;
+        this.loading = false;
+        this.errorStatus = error.status;
       }
-    )
+    });
   }
 
   handleShowMore(): void {
