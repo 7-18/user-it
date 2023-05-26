@@ -12,7 +12,7 @@ interface Translations {
   providedIn: 'root'
 })
 
-export class TranslationsService {
+export class TranslationService {
   // An object containing all the translations for the application (English and Spanish).
   private translations: Translations = {
     en: {
@@ -28,7 +28,8 @@ export class TranslationsService {
       },
       alert: {
         title_error: 'Error',
-        message_error: 'Incorrect email or password. Please try again.'
+        message_error: 'Incorrect email or password. Please try again.',
+        data_error: 'Something went wrong. Please try again later.'
       },
       language: {
         en: 'English (US)',
@@ -84,7 +85,8 @@ export class TranslationsService {
       },
       alert: {
         title_error: 'Error',
-        message_error: 'Correo electrónico o contraseña incorrectos. Inténtalo de nuevo.'
+        message_error: 'Correo electrónico o contraseña incorrectos. Inténtalo de nuevo.',
+        data_error: 'Algo salió mal. Inténtalo de nuevo.'
       },
       language: {
         en: 'Inglés (ES)',
