@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TranslationsService } from '../service/translations/translations.service';
+import { TranslationService } from '../service/translation/translation.service';
 import { AuthService } from '../service/auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -17,14 +17,10 @@ export class LoginComponent {
   isFormValid = false;
   showErrorAlert = false;
 
-  constructor(public translationService: TranslationsService, private authService: AuthService, private router: Router) {}
+  constructor(public translationService: TranslationService, private authService: AuthService, private router: Router) {}
 
   onInputChange() {
     this.isFormValid = this.emailValue.trim() !== '' && this.passwordValue.trim() !== '';
-  }
-
-  closeAlert() {
-    this.showErrorAlert = false;
   }
 
   onSubmit() {

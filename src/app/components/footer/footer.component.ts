@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TranslationsService } from 'src/app/service/translations/translations.service';
+import { TranslationService } from 'src/app/service/translation/translation.service';
 
 @Component({
   selector: 'app-footer',
@@ -9,7 +9,7 @@ import { TranslationsService } from 'src/app/service/translations/translations.s
 export class FooterComponent {
   year: number;
 
-  constructor(public translationService: TranslationsService) {
+  constructor(public translationService: TranslationService) {
     this.year = new Date().getFullYear();
   }
 }

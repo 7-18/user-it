@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
-import { TranslationsService } from 'src/app/service/translations/translations.service';
+import { TranslationService } from 'src/app/service/translation/translation.service';
 
 @Component({
   selector: 'app-navigation',
@@ -16,7 +16,7 @@ export class NavigationComponent {
   currentLanguage = 'en';
   currentUser: { firstName: string, lastName: string, image: string, email: string } | null = null;
 
-  constructor(public translationService: TranslationsService, private authService: AuthService, private router: Router) { }
+  constructor(public translationService: TranslationService, private authService: AuthService, private router: Router) { }
 
   // Initializes component variables and subscribes to auth and language events.
   ngOnInit(): void {

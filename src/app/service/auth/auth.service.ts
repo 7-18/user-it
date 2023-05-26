@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(private api: ApiService) {
     this.getData();
-   }
+  }
 
   // Retrieves data from the API endpoint and maps (only the principal data) it to the userList property.
   getData(): void {
@@ -20,8 +20,9 @@ export class AuthService {
       data => {
         this.userList = data.users.map((user: User) => {
           return { email: user.email, password: user.password, firstName: user.firstName, lastName: user.lastName, image: user.image };
-        })}
-    )
+        });
+      }
+    );
   }
 
   // Log an user given an email and password. It searches the userList for a match,
